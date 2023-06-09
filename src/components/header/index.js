@@ -33,15 +33,15 @@ const Header = () => {
                 redirect: false,
               });
             }}
-            className="inline-flex items-center rounded border-0 bg-gray-800 px-3 py-1 text-base hover:bg-gray-700 focus:outline-none mt-0"
+            className="mt-0 inline-flex items-center rounded border-0 bg-gray-800 px-3 py-1 text-base hover:bg-gray-700 focus:outline-none"
           >
             Log Out
             <svg
               fill="none"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               className="ml-1 h-4 w-4"
               viewBox="0 0 24 24"
             >

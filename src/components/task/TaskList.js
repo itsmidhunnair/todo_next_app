@@ -1,7 +1,7 @@
 import _ from "lodash";
 import TaskListItem from "./TaskListItem";
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, updateTasks }) => {
   return (
     <section className="body-font pt-3 text-gray-900">
       <div className="container mx-auto px-5 py-2">
@@ -11,8 +11,13 @@ const TaskList = ({ tasks }) => {
           </h1>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3">
-          {tasks[0].todos?.map((task) => (
-            <TaskListItem task={task} key={task._id} />
+          {tasks?.map((task) => (
+            <TaskListItem
+              task={task}
+              allTasks={tasks}
+              updateTasks={updateTasks}
+              key={task._id}
+            />
           ))}
         </div>
       </div>

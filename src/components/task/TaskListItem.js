@@ -4,12 +4,16 @@ import { AiFillDelete } from "react-icons/ai";
 import { useState } from "react";
 import useTask from "@hooks/useTask";
 
-const TaskListItem = ({ task }) => {
+const TaskListItem = ({ task, allTasks, updateTasks }) => {
   const { name, description, completed, _id } = task;
 
   const [status, setStatus] = useState(`${completed}`);
 
-  const { updateStatus, deleteTask } = useTask(setStatus, status);
+  const { updateStatus, deleteTask } = useTask({
+    setStatus,
+    allTasks,
+    updateTasks,
+  });
 
   return (
     <>
@@ -51,7 +55,7 @@ const TaskListItem = ({ task }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    classname="w-4 h-4"
+                    className="w-4 h-4"
                     viewBox="0 0 24 24"
                   >
                     <path d="M6 9l6 6 6-6" />
@@ -63,7 +67,7 @@ const TaskListItem = ({ task }) => {
           </div>
           <p className="text-base leading-relaxed">{description}</p>
           <button
-            onClick={()=>deleteTask(_id)}
+            onClick={() => deleteTask(_id)}
             className="group absolute bottom-0 right-0 flex items-center rounded-br-lg rounded-tl-lg bg-red-800 p-2 "
           >
             <AiFillDelete className="text-white" />

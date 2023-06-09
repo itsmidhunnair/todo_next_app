@@ -5,18 +5,11 @@ import Header from "@components/header";
 import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  if (Component.getLayout) {
-    return (
-      <SessionProvider session={session}>
-        <Component {...pageProps} />
-      </SessionProvider>
-    );
-  }
-
   return (
     <>
+      
       <SessionProvider session={session}>
-        <Header />
+        {!Component.getLayout && <Header />}
         <Component {...pageProps} />
       </SessionProvider>
     </>

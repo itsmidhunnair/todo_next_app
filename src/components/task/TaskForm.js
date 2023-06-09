@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-const TaskForm = ({ addTask, dataAdded }) => {
+const TaskForm = ({ addTask }) => {
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     reset();
-  }, [dataAdded]);
+  }, [addTask]);
 
   return (
     <section className="body-font text-gray-600">

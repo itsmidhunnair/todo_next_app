@@ -1,14 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const useTask = (setStatus, status) => {
-  const [dataAdded, setDataAdded] = useState(false);
+const useTask = ({ setStatus, allTasks, updateTasks }) => {
   const [tasks, setTasks] = useState([]);
 
   const addTask = async (taskData) => {
     try {
       const { data } = await axios.post("/api/task/addtask", taskData);
-      setDataAdded(!dataAdded);
+      setTasks([...tasks, data]);
     } catch (error) {
       console.log(error);
     }
@@ -17,7 +16,7 @@ const useTask = (setStatus, status) => {
   const getAllTask = async () => {
     try {
       const { data } = await axios.get("/api/task/gettask");
-      setTasks(data);
+      setTasks(data[0].todos);
     } catch (error) {
       console.log(error);
     }
@@ -39,13 +38,22 @@ const useTask = (setStatus, status) => {
   const deleteTask = async (id) => {
     try {
       const { data } = await axios.delete(`/api/task/delete/${id}`);
-      console.log(data);
+      const newTasks = allTasks.filter((todo) => todo._id !== id);
+      console.log(newTasks);
+      updateTasks(newTasks);
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { getAllTask, addTask, tasks, dataAdded, updateStatus, deleteTask };
+  return {
+    getAllTask,
+    addTask,
+    setTasks,
+    tasks,
+    updateStatus,
+    deleteTask,
+  };
 };
 
 export default useTask;
