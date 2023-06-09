@@ -60,7 +60,7 @@ const LoginForm = () => {
                   />
                 </div>
               </div>
-              <div className="flex w-full items-end justify-between p-2">
+              <div className="flex w-full items-end justify-between gap-y-3 p-2 max-sm:flex-col  max-sm:items-start">
                 <button
                   type="submit"
                   className="mt-4 flex rounded border-0 bg-[#111827] px-8 py-2 text-lg text-white hover:bg-[#2f3b54] focus:outline-none"
@@ -76,7 +76,7 @@ const LoginForm = () => {
                 </span>
               </div>
             </form>
-          <OauthPart/>
+            <OauthPart />
           </div>
         </div>
       </div>

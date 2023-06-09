@@ -1,3 +1,4 @@
+import { path } from "@constants/path";
 import { toastConfig } from "@constants/toastConfig";
 import axios from "axios";
 import { signIn } from "next-auth/react";
@@ -41,10 +42,28 @@ const useAuth = () => {
   const githubAuth = async () => {
     const result = await toast.promise(
       signIn("github", {
-        callbackUrl: "http://localhost:3000/tasks",
+        callbackUrl: `${path.appBaseUrl}/tasks`,
       }),
       {
         pending: "Attempting to Login with github...",
+        error: (
+          <div>
+            Login Attempt Failed! <br /> Please use another login methods.
+          </div>
+        ),
+        success: <div>Login Successfull!</div>,
+      }
+    );
+    console.log(result);
+  };
+
+  const googleAuth = async () => {
+    const result = await toast.promise(
+      signIn("google", {
+        callbackUrl: `${path.appBaseUrl}/tasks`,
+      }),
+      {
+        pending: "Attempting to Login with Google...",
         error: (
           <div>
             Login Attempt Failed! <br /> Please use another login methods.
@@ -62,7 +81,7 @@ const useAuth = () => {
       email,
       password,
       redirect: false,
-      callbackUrl: "http://localhost:3000/tasks",
+      callbackUrl: `${path.appBaseUrl}/tasks`,
     });
     console.log(result);
     if (result.status === 401) {
@@ -83,7 +102,7 @@ const useAuth = () => {
     }
   };
 
-  return { signupUser, loginUser, githubAuth };
+  return { signupUser, loginUser, githubAuth, googleAuth };
 };
 
 export default useAuth;

@@ -4,6 +4,7 @@ import userSchema from "@utils/schema/userSchema";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
   callbacks: {
@@ -39,6 +40,10 @@ export const authOptions = {
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     Credentials({
       async authorize(credentials, req) {
         const { email, password } = credentials;
@@ -54,6 +59,9 @@ export const authOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/login",
+  },
 };
 
 export default NextAuth(authOptions);

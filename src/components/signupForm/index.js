@@ -94,7 +94,7 @@ const SignupForm = () => {
                   />
                 </div>
               </div>
-              <div className="flex w-full items-end justify-between p-2 max-sm:flex-col  max-sm:items-start">
+              <div className="flex w-full items-end justify-between p-2 max-sm:flex-col gap-y-3  max-sm:items-start">
                 <button className="mt-4 flex rounded border-0 bg-[#111827] px-8 py-2 text-lg text-white hover:bg-[#2f3b54] focus:outline-none">
                   Sign up
                 </button>
