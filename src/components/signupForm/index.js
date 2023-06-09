@@ -3,12 +3,16 @@ import OauthPart from "@components/common/signup-login/OauthPart";
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
-import { VscGithub } from "react-icons/vsc";
 import useAuth from "src/hooks/useAuth";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { signupSchema } from "@constants/schema";
 
 const SignupForm = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(signupSchema) });
 
   const { signupUser } = useAuth();
 
@@ -40,6 +44,9 @@ const SignupForm = () => {
                     placeholder="Enter your name here"
                     className="w-full rounded border border-gray-300 bg-gray-100 bg-opacity-50 px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-[#2aa9e7] focus:bg-white focus:ring-2 focus:ring-indigo-200"
                   />
+                  <span className="text-sm text-red-800">
+                    {errors.name?.message}
+                  </span>
                 </div>
               </div>
               {/* <div className="w-full p-2">
@@ -56,9 +63,9 @@ const SignupForm = () => {
                   name="date"
                   placeholder="Enter your Date of Birth here"
                   className="w-full rounded border border-gray-300 bg-gray-100 bg-opacity-50 px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-[#2aa9e7] focus:bg-white focus:ring-2 focus:ring-indigo-200"
-                />
-              </div>
-            </div> */}
+                  />
+                  </div>
+                </div> */}
               <div className="w-full p-2">
                 <div className="relative">
                   <label
@@ -75,6 +82,9 @@ const SignupForm = () => {
                     placeholder="Enter your email here"
                     className="w-full rounded border border-gray-300 bg-gray-100 bg-opacity-50 px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-[#2aa9e7] focus:bg-white focus:ring-2 focus:ring-indigo-200"
                   />
+                  <span className="text-sm text-red-800">
+                    {errors.email?.message}
+                  </span>
                 </div>
               </div>
               <div className="w-full p-2">
@@ -82,7 +92,7 @@ const SignupForm = () => {
                   <label
                     htmlFor="password"
                     className="text-sm leading-7 text-gray-600"
-                  >
+                    >
                     Password
                   </label>
                   <input
@@ -91,10 +101,13 @@ const SignupForm = () => {
                     name="password"
                     placeholder="Enter your password here"
                     className="w-full rounded border border-gray-300 bg-gray-100 bg-opacity-50 px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-[#2aa9e7] focus:bg-white focus:ring-2 focus:ring-indigo-200"
-                  />
+                    />
+                  <span className="text-sm text-red-800">
+                    {errors.password?.message}
+                  </span>
                 </div>
               </div>
-              <div className="flex w-full items-end justify-between p-2 max-sm:flex-col gap-y-3  max-sm:items-start">
+              <div className="flex w-full items-end justify-between gap-y-3 p-2 max-sm:flex-col  max-sm:items-start">
                 <button className="mt-4 flex rounded border-0 bg-[#111827] px-8 py-2 text-lg text-white hover:bg-[#2f3b54] focus:outline-none">
                   Sign up
                 </button>
