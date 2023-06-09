@@ -1,10 +1,25 @@
+import { toastConfig } from "@constants/toastConfig";
 import useTask from "@hooks/useTask";
+import useToast from "@hooks/useToast";
+import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 
 const TaskFormGrp = () => {
   const { addTask, getAllTask, tasks, dataAdded, setTasks } = useTask([]);
+
+  const { status } = useSession();
+
+  const { greetUser } = useToast();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      toast(greetUser, { ...toastConfig });
+    }
+  }, []);
+
   useEffect(() => {
     getAllTask();
   }, [dataAdded]);

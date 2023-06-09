@@ -1,7 +1,6 @@
 import TaskFormGrp from "@components/task";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-
 const Task = () => {
   const router = useRouter();
   const { status } = useSession({

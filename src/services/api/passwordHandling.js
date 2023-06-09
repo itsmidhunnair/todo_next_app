@@ -20,12 +20,13 @@ async function verifyPassword(email, password) {
   try {
     const encPass = await userSchema
       .findOne({ email: email })
-      ?.select("password");
+      ?.select("password name");
+    const name = encPass.name;
     const hash = encPass.password;
     console.log("hash", hash);
     const isMatch = await bcrypt.compare(password, hash);
     if (isMatch) {
-      return { email };
+      return { email, name };
     } else {
       return isMatch;
     }
