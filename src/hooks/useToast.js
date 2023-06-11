@@ -11,7 +11,7 @@ const useToast = () => {
       <div className="text-center">
         Welcome <span className="font-bold">{data.user.name}</span>
         <br />
-        Let's do something Productive today!!
+        Let&apos;s do something Productive today!!
       </div>
     );
   };

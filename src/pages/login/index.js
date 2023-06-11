@@ -1,3 +1,4 @@
+import Loader from "@components/common/loader/Loader";
 import LoginForm from "@components/loginForm";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";

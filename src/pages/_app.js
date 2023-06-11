@@ -22,7 +22,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           pauseOnHover
           theme="light"
         />
-        {!Component.getLayout && <Header />}
+        {/* {!Component.getLayout && <Header />} */}
+        <Header />
         <Component {...pageProps} />
       </SessionProvider>
     </>
