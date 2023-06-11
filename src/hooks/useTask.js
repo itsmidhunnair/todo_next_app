@@ -82,6 +82,15 @@ const useTask = ({ setStatus, allTasks, updateTasks }) => {
     }
   };
 
+  const getTaskCount = async () => {
+    try {
+      const { data } = await axios.get("/api/task/taskcount");
+      return data
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     getAllTask,
     addTask,
@@ -89,6 +98,7 @@ const useTask = ({ setStatus, allTasks, updateTasks }) => {
     tasks,
     updateStatus,
     deleteTask,
+    getTaskCount,
   };
 };
 

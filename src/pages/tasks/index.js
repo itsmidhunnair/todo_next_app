@@ -1,3 +1,4 @@
+import Loader from "@components/common/loader/Loader";
 import TaskFormGrp from "@components/task";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -11,7 +12,7 @@ const Task = () => {
   });
 
   if (status === "loading") {
-    return <h1>Loading...</h1>;
+    return <Loader/>;
   }
 
   return (

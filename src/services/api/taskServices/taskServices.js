@@ -49,4 +49,19 @@ const removeTask = async (email, id) => {
   }
 };
 
-export { createTask, fetchTask, changeStatus, removeTask };
+const fetchTaskCount = async (email) => {
+  try {
+    const result = await taskSchema.find({ email }).select("todos");
+    const todos = result[0].todos;
+    let data = {};
+    data.total = todos.length;
+    data.completed = todos.filter((todo) => todo.completed === true).length;
+    data.pending = data.total - data.completed;
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export { createTask, fetchTask, changeStatus, removeTask, fetchTaskCount };

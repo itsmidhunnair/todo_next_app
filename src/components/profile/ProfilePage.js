@@ -1,10 +1,25 @@
 import LogoHeader from "@components/common/LogoHeader";
+import { loginSchema } from "@constants/schema";
+import useTask from "@hooks/useTask";
 import { useSession } from "next-auth/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const ProfilePage = () => {
+  const [taskCnt, setTaskCnt] = useState();
+
   const { data } = useSession();
-  console.log(data);
+
+  const { getTaskCount } = useTask({});
+
+  const fetchTaskCount = async () => {
+    const cnt = await getTaskCount();
+    console.log(cnt);
+    setTaskCnt(cnt);
+  };
+  useEffect(() => {
+    fetchTaskCount();
+  }, []);
+
   return (
     <div className="m-10 mx-auto max-w-2xl rounded-xl border-2">
       <LogoHeader />
@@ -32,6 +47,24 @@ const ProfilePage = () => {
           <div>
             <span className="font-semibold">Email: </span>
             <span>{data?.user.email}</span>
+          </div>
+          <div className="mt-5 rounded-lg border-2 border-gray-700 p-5">
+            <div className="flex items-center justify-center border-b-2 py-3">
+              <span className="font-semibold">Completed Task: </span>
+              <span className="pl-2 text-2xl font-bold text-teal-700">
+                {taskCnt?.completed}
+              </span>
+            </div>
+            <div className="flex items-center justify-center border-b-2 py-3">
+              <span className="font-semibold">Pending Task: </span>
+              <span className="pl-2 text-2xl font-bold text-orange-400">
+                {taskCnt?.pending}
+              </span>
+            </div>
+            <div className="flex items-center justify-center border-b-2 py-3">
+              <span className="font-semibold">Total Task: </span>
+              <span className="pl-2 text-2xl font-bold">{taskCnt?.total}</span>
+            </div>
           </div>
         </div>
       </div>
