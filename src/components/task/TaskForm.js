@@ -1,8 +1,15 @@
+import { taskFormSchema } from "@constants/schema";
+import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const TaskForm = ({ addTask }) => {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({resolver: yupResolver(taskFormSchema)});
 
   useEffect(() => {
     reset();
@@ -25,6 +32,7 @@ const TaskForm = ({ addTask }) => {
                 placeholder="Enter Task Name"
                 className="w-full rounded border border-gray-300 bg-white px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-[#111827] focus:ring-2 focus:ring-[#11182749]"
               />
+              <span className="text-red-900 text-sm">{errors.name?.message}</span>
             </div>
             <div className="relative mb-4">
               <label

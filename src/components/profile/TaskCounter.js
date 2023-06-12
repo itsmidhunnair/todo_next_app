@@ -23,6 +23,8 @@ const TaskCounter = () => {
     <>
       {loading ? (
         <Loader />
+      ) : taskCnt?.present ? (
+        <span className="font-semibold">{taskCnt?.present}</span>
       ) : (
         <div className="mt-5 rounded-lg border-2 border-gray-700 p-5">
           <div className="flex items-center justify-center border-b-2 py-3">

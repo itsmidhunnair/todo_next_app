@@ -36,3 +36,16 @@ export const loginSchema = yup
     password: yup.string().required(),
   })
   .required();
+
+/**
+ * Task Form Input Schemas
+ * @field Name
+ * @field Description
+ */
+export const taskFormSchema = yup
+  .object()
+  .shape({
+    name: yup.string().required("Task Name Name is required."),
+    description: yup.string(),
+  })
+  .required();
