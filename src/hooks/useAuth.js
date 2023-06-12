@@ -1,7 +1,7 @@
 import { path } from "@constants/path";
 import { toastConfig } from "@constants/toastConfig";
 import axios from "axios";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
@@ -102,7 +102,21 @@ const useAuth = () => {
     }
   };
 
-  return { signupUser, loginUser, githubAuth, googleAuth };
+  const logout = async () => {
+    await toast.promise(
+      signOut({
+        callbackUrl: "http://localhost:3000/login",
+        redirect: false,
+      }),
+      {
+        pending: "Logging Out...",
+        error: "Log out Failed Please Try again in sometime.",
+        success: "User Loggedout Successfully!",
+      }
+    );
+  };
+
+  return { signupUser, loginUser, githubAuth, googleAuth, logout };
 };
 
 export default useAuth;

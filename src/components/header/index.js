@@ -1,3 +1,4 @@
+import useAuth from "@hooks/useAuth";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -7,6 +8,8 @@ const Header = () => {
   const { status } = useSession();
 
   const { asPath } = useRouter();
+
+  const {logout} = useAuth()
 
   return (
     <header className="body-font sticky top-0 z-50 bg-gray-900 text-gray-400 shadow-lg shadow-slate-600">
@@ -71,10 +74,7 @@ const Header = () => {
         {status === "authenticated" && (
           <button
             onClick={() => {
-              signOut({
-                callbackUrl: "http://localhost:3000/login",
-                redirect: false,
-              });
+              logout()
             }}
             className="mt-0 inline-flex items-center rounded border-0 bg-gray-800 px-3 py-1 text-base hover:bg-gray-700 focus:outline-none"
           >
